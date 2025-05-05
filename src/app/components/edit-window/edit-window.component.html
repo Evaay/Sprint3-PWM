@@ -1,17 +1,29 @@
-<div class="profile-container" >
-  <img id="profileSetting" class="circleFrame photo" [src]='defaultPhoto' alt="userPhoto" >
-  <button id="selectButton">
-    <img id="settingProfilePhoto" (click)="onClickToChangeProfilePhoto()" src="assets/images/mark.png" alt="aceptar">
-  </button>
-</div>
-<div class="edit-frame">
-  <div>
-    <table id="profileTable" class="profile-table" >
-      <tr *ngFor="let row of rows">
-        <td *ngFor="let col of columns" (click)="changeProfilePhoto(row * 5 + col)">
-          <img class="profile-image" [src]="'assets/images/icons/' + (row * 5 + col) + '.jpg'" alt="icons">
-        </td>
-      </tr>
-    </table>
+<ion-content>
+
+  <!-- Foto de perfil con botón de cambio -->
+  <div class="profile-container">
+    <ion-img id="profileSetting" class="circleFrame photo" [src]="defaultPhoto" alt="userPhoto"></ion-img>
+
+    <ion-button id="selectButton" fill="clear" (click)="onClickToChangeProfilePhoto()">
+      <ion-img id="settingProfilePhoto" src="assets/images/mark.png" alt="aceptar"></ion-img>
+    </ion-button>
   </div>
-</div>
+
+  <!-- Cuadro de selección de iconos -->
+  <div class="edit-frame">
+    <div>
+      <table id="profileTable" class="profile-table">
+        <tr *ngFor="let row of rows">
+          <td *ngFor="let col of columns" (click)="changeProfilePhoto(row * 5 + col)">
+            <ion-img
+              class="profile-image"
+              [src]="'assets/images/icons/' + (row * 5 + col) + '.jpg'"
+              alt="icon"
+            ></ion-img>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</ion-content>

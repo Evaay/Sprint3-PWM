@@ -1,22 +1,21 @@
-<!-- photoCarousel.component.html -->
-<div id="carousel">
-  <div class="slides">
-    <div
-      class="slide"
-      *ngFor="let image of images; let i = index"
-      [class.active]="i === currentSlide"
-      [style.display]="i === currentSlide ? 'block' : 'none'"
-    >
-      <img [src]="image.src" [alt]="image.alt" />
+<ion-content>
+  <div id="carousel">
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let image of images; let i = index">
+        <ion-img [src]="image.src" [alt]="image.alt"></ion-img>
+      </ion-slide>
+    </ion-slides>
+
+    <div class="dots">
+      <ion-button
+        *ngFor="let _ of images; let i = index"
+        fill="clear"
+        color="primary"
+        [class.active]="i === currentSlide"
+        (click)="showSlide(i)"
+      >
+        <ion-icon name="ellipse" slot="icon-only"></ion-icon>
+      </ion-button>
     </div>
   </div>
-
-  <div class="dots">
-    <span
-      class="dot"
-      *ngFor="let _ of images; let i = index"
-      [class.active]="i === currentSlide"
-      (click)="showSlide(i)"
-    ></span>
-  </div>
-</div>
+</ion-content>

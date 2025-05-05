@@ -1,14 +1,20 @@
-
+<ion-content>
   <div class="chatPanel-container">
     <div id="userProfile">
       <figure id="profile-frame">
-        <img id="profile-photo" class="photo" [src]="userPhoto"  alt="user photo">
+        <img id="profile-photo" class="photo" [src]="userPhoto" alt="user photo">
       </figure>
     </div>
-    <ul class="conversation-container" id="chatConversationContainer">
-      <li *ngFor="let conversation of conversations" (click)="openChatWindow(conversation?.profilePhoto)">
-        <app-message-audio [userPhoto]='conversation?.profilePhoto'></app-message-audio>
-      </li>
-    </ul>
-</div>
 
+    <ion-list class="conversation-container" id="chatConversationContainer">
+      <ion-item
+        button
+        *ngFor="let conversation of conversations"
+        (click)="openChatWindow(conversation?.profilePhoto)"
+        lines="none"
+      >
+        <app-message-audio [userPhoto]="conversation?.profilePhoto"></app-message-audio>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,26 +1,47 @@
+<ion-content>
+  <div class="chat-window-container">
+    <div class="conversation-main-container">
+      <div class="conversation-container">
+        <ion-list id="chatsWindowContainer">
+          <ion-item
+            *ngIf="chatUserProfile"
+            class="chatMessagebox"
+            lines="none"
+          >
+            <app-message-audio [userPhoto]="chatUserProfile"></app-message-audio>
+          </ion-item>
 
-<div class="chat-window-container">
-  <div class="conversation-main-container" >
-    <div class="conversation-container">
-      <ul id="chatsWindowContainer">
-        <li *ngIf="chatUserProfile" class="chatMessagebox">
-          <app-message-audio [userPhoto]="chatUserProfile" ></app-message-audio>
-        </li>
-        <li *ngIf="currentUserProfile" class="myChatMessage">
-          <app-message-audio [userPhoto]="currentUserProfile" ></app-message-audio>
-        </li>
+          <ion-item
+            *ngIf="currentUserProfile"
+            class="myChatMessage"
+            lines="none"
+          >
+            <app-message-audio [userPhoto]="currentUserProfile"></app-message-audio>
+          </ion-item>
 
-        <li *ngIf="chatUserProfile" class="chatMessagebox">
-          <app-message-audio [userPhoto]="chatUserProfile" class="chatMessagebox"></app-message-audio>
-        </li>
-        <li *ngIf="currentUserProfile" class="myChatMessage">
-          <app-message-audio [userPhoto]="currentUserProfile" class="myChatMessage"></app-message-audio>
-        </li>
-      </ul>
+          <ion-item
+            *ngIf="chatUserProfile"
+            class="chatMessagebox"
+            lines="none"
+          >
+            <app-message-audio [userPhoto]="chatUserProfile"></app-message-audio>
+          </ion-item>
 
+          <ion-item
+            *ngIf="currentUserProfile"
+            class="myChatMessage"
+            lines="none"
+          >
+            <app-message-audio [userPhoto]="currentUserProfile"></app-message-audio>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <ion-button class="mic-button" fill="clear">
+        <ion-img src="assets/images/microphone.png" alt="microfono"></ion-img>
+      </ion-button>
     </div>
   </div>
-  <div class="button-container">
-    <button class="mic-button"><img src="assets/images/microphone.png" alt="microfono"></button>
-  </div>
-</div>
+</ion-content>

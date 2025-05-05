@@ -1,88 +1,85 @@
-<div class="setting-body">
-  <div class="setting-container" [class.expanded]="isFormTouchedAndInvalid">
-    <h2 class="password-Text">Modificar Contraseña</h2>
-    <form [formGroup]="form" (ngSubmit)="changePassword()" id="passwordForm">
-      <section>
-        <label for="currentPassword">Contraseña Actual:</label>
-        <input type="password" id="currentPassword" placeholder="Ingresa tu contraseña actual"
-               formControlName="currentPassword">
-        @if (form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('required')) {
-          <span class="error-message">Es obligatorio introducir una contraseña</span>
-        }
-        @if (form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('minLength')) {
-          <span class="error-message">La contraseña debe de contener al menos 8 dígitos</span>
-        }
-        @if (form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('pattern')) {
-          <span class="error-message">La contraseña no sigue el patrón correcto</span>
-          <span class="error-message">1 Mayúscula</span>
-          <span class="error-message">1 Minúsucla</span>
-          <span class="error-message">1 Carácter especial</span>
-        }
-        @if (form.get('currentPassword')?.touched && form.get('currentPassword')?.errors?.['incorrectPassword']) {
-          <span class="error-message">La contraseña es incorrecta</span>
-        }
+<ion-content>
+  <div class="setting-body">
+    <div class="setting-container" [class.expanded]="isFormTouchedAndInvalid">
+      <h2 class="password-Text">Modificar Contraseña</h2>
+      <form [formGroup]="form" (ngSubmit)="changePassword()" id="passwordForm">
+
+        <!-- Contraseña actual -->
+        <ion-item>
+          <ion-label position="floating">Contraseña Actual:</ion-label>
+          <ion-input type="password" formControlName="currentPassword" placeholder="Ingresa tu contraseña actual"></ion-input>
+        </ion-item>
+        <div *ngIf="form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('required')">
+          <ion-text color="danger">Es obligatorio introducir una contraseña</ion-text>
+        </div>
+        <div *ngIf="form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('minLength')">
+          <ion-text color="danger">La contraseña debe de contener al menos 8 dígitos</ion-text>
+        </div>
+        <div *ngIf="form.get('currentPassword')?.touched && form.get('currentPassword')?.hasError('pattern')">
+          <ion-text color="danger">La contraseña no sigue el patrón correcto. 1 Mayúscula, 1 Minúscula, 1 Carácter especial</ion-text>
+        </div>
+        <div *ngIf="form.get('currentPassword')?.touched && form.get('currentPassword')?.errors?.['incorrectPassword']">
+          <ion-text color="danger">La contraseña es incorrecta</ion-text>
+        </div>
+
+        <!-- Nueva contraseña -->
+        <ion-item>
+          <ion-label position="floating">Nueva Contraseña:</ion-label>
+          <ion-input type="password" formControlName="newPassword" placeholder="Ingresa la nueva contraseña"></ion-input>
+        </ion-item>
+        <div *ngIf="form.get('newPassword')?.touched && form.get('newPassword')?.hasError('required')">
+          <ion-text color="danger">Es obligatorio introducir una contraseña</ion-text>
+        </div>
+        <div *ngIf="form.get('newPassword')?.touched && form.get('newPassword')?.hasError('minLength')">
+          <ion-text color="danger">La contraseña debe de contener al menos 8 dígitos</ion-text>
+        </div>
+        <div *ngIf="form.get('newPassword')?.touched && form.get('newPassword')?.hasError('maxLength')">
+          <ion-text color="danger">La contraseña debe de contener menos de 15 dígitos</ion-text>
+        </div>
+        <div *ngIf="form.get('newPassword')?.touched && form.get('newPassword')?.hasError('pattern')">
+          <ion-text color="danger">La contraseña no sigue el patrón correcto. 1 Mayúscula, 1 Minúscula, 1 Carácter especial</ion-text>
+        </div>
+
+        <!-- Confirmar nueva contraseña -->
+        <ion-item>
+          <ion-label position="floating">Confirmar nueva contraseña:</ion-label>
+          <ion-input type="password" formControlName="confirmPassword" placeholder="Confirma la nueva contraseña"></ion-input>
+        </ion-item>
+        <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('required')">
+          <ion-text color="danger">Es obligatorio introducir una contraseña</ion-text>
+        </div>
+        <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('minLength')">
+          <ion-text color="danger">La contraseña debe de contener al menos 8 dígitos</ion-text>
+        </div>
+        <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('maxLength')">
+          <ion-text color="danger">La contraseña debe de contener menos de 15 dígitos</ion-text>
+        </div>
+        <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('pattern')">
+          <ion-text color="danger">La contraseña no sigue el patrón correcto. 1 Mayúscula, 1 Minúscula, 1 Carácter especial</ion-text>
+        </div>
+        <div *ngIf="showPasswordMatchError()">
+          <ion-text color="danger">Las contraseñas no coinciden</ion-text>
+        </div>
+
+        <!-- Botón de cambio de contraseña -->
+        <ion-item>
+          <ion-button expand="full" type="submit">Cambiar Contraseña</ion-button>
+        </ion-item>
+      </form>
+
+      <!-- Selección de tema -->
+      <section id="change-theme">
+        <ion-label class="setting-theme-label">Seleccionar Tema:</ion-label><br>
+        <ion-select id="themeSelect" [(ngModel)]="theme" (ionChange)="changeTheme()">
+          <ion-select-option value="normal">Normal</ion-select-option>
+          <ion-select-option value="dark">Oscuro</ion-select-option>
+        </ion-select>
       </section>
 
-      <section>
-        <label for="newPassword">Nueva Contraseña:</label>
-        <input type="password" id="newPassword" placeholder="Ingresa la nueva contraseña"
-               formControlName="newPassword">
-        @if (form.get('newPassword')?.touched && form.get('newPassword')?.hasError('required')) {
-          <span class="error-message">Es obligatorio introducir una contraseña</span>
-        }
-        @if (form.get('newPassword')?.touched && form.get('newPassword')?.hasError('minLength')) {
-          <span class="error-message">La contraseña debe de contener al menos 8 dígitos</span>
-        }
-        @if (form.get('newPassword')?.touched && form.get('newPassword')?.hasError('maxLength')) {
-          <span class="error-message">La contraseña debe de contener menos de 15 dígitos</span>
-        }
-        @if (form.get('newPassword')?.touched && form.get('newPassword')?.hasError('pattern')) {
-          <span class="error-message">La contraseña no sigue el patrón correcto</span>
-          <span class="error-message">1 Mayúscula</span>
-          <span class="error-message">1 Minúsucla</span>
-          <span class="error-message">1 Carácter especial</span>
-        }
+      <!-- Cerrar sesión -->
+      <section id="close">
+        <ion-button expand="full" color="danger" (click)="logout()">Cerrar sesión</ion-button>
       </section>
-
-      <section>
-        <label for="confirmPassword">Confirmar nueva contraseña:</label>
-        <input type="password" id="confirmPassword" placeholder="Confirma la nueva contraseña"
-               formControlName="confirmPassword">
-        @if (form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('required')) {
-          <span class="error-message">Es obligatorio introducir una contraseña</span>
-        }
-        @if (form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('minLength')) {
-          <span class="error-message">La contraseña debe de contener al menos 8 dígitos</span>
-        }
-        @if (form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('maxLength')) {
-          <span class="error-message">La contraseña debe de contener menos de 15 dígitos</span>
-        }
-        @if (form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('pattern')) {
-          <span class="error-message">La contraseña no sigue el patrón correcto</span>
-          <span class="error-message">1 Mayúscula</span>
-          <span class="error-message">1 Minúsucla</span>
-          <span class="error-message">1 Carácter especial</span>
-        }
-        @if (showPasswordMatchError()) {
-          <span class="error-message">Las contraseñas no coinciden</span>
-        }
-      </section>
-
-      <section class="inputOptions-Field" id="password-Field">
-        <button type="submit" id="setting-button">Cambiar Contraseña</button>
-      </section>
-    </form>
-
-    <section id="change-theme">
-      <label for="themeSelect" class="setting-theme-label">Seleccionar Tema:</label><br>
-      <select id="themeSelect" class="setting-select" [(ngModel)]="theme" (change)="changeTheme()">
-        <option value="normal">Normal</option>
-        <option value="dark">Oscuro</option>
-      </select>
-    </section>
-
-    <section id="close">
-      <button type="button" id="logOut-button" (click)="logout()">Cerrar sesión</button>
-    </section>
+    </div>
   </div>
-</div>
+</ion-content>

@@ -1,17 +1,20 @@
-<div class="requestMessageBox" >
-  <div class="invitationChat">
-    <ng-container *ngIf="requestUser.profilePhoto">
-      <app-message-audio [userPhoto]="requestUser.profilePhoto"></app-message-audio>
-    </ng-container>
-  </div>
+<ion-card class="requestMessageBox">
+  <ion-card-content>
+    <div class="invitationChat">
+      <ng-container *ngIf="requestUser.profilePhoto">
+        <app-message-audio [userPhoto]="requestUser.profilePhoto"></app-message-audio>
+      </ng-container>
+    </div>
 
-  <div class="button-box">
-    <button class="centerButton">
-      <img src="assets/images/aceptar.png" class="acceptButton" (click)="accept()">
-    </button>
-    <button>
-      <img src="assets/images/rechazar.png" class="rejectButton" (click)="reject()">
-    </button>
-  </div>
-</div>
-
+    <div class="button-box">
+      <ion-button fill="solid" color="success" class="centerButton" (click)="accept()">
+        <ion-icon slot="start" src="assets/images/aceptar.png" class="acceptButton"></ion-icon>
+        Aceptar
+      </ion-button>
+      <ion-button fill="solid" color="danger" (click)="reject()">
+        <ion-icon slot="start" src="assets/images/rechazar.png" class="rejectButton"></ion-icon>
+        Rechazar
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
